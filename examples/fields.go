@@ -1,3 +1,4 @@
+//go:build ignore
 // +build ignore
 
 package main
@@ -18,14 +19,13 @@ func main() {
 	// To set a field when setting an object:
 	if err := tile38.Keys.Set("fleet", "truck1").
 		Point(33.5123, -112.2693).
-		Field("speed", 90).
-		Field("age", 21).
+		FieldStrType("vehicle_id", "24jhkjhsf235").
 		Do(); err != nil {
 		log.Fatal(err)
 	}
 
 	// To set a field when an object already exists:
-	if err := tile38.Keys.FSet("fleet", "truck1").Field("speed", 90).Do(); err != nil {
+	if err := tile38.Keys.FSet("fleet", "truck1").FieldNumType("speed", 90).Do(); err != nil {
 		log.Fatal(err)
 	}
 }

@@ -2,11 +2,12 @@ package t38c
 
 // FSetQueryBuilder struct
 type FSetQueryBuilder struct {
-	client   tile38Client
-	key      string
-	objectID string
-	fields   []field
-	xx       bool
+	client    tile38Client
+	key       string
+	objectID  string
+	fieldNums []fieldNumType
+	fieldStrs []fieldStrType
+	xx        bool
 }
 
 func newFSetQueryBuilder(client tile38Client, key, objectID string) FSetQueryBuilder {
@@ -23,8 +24,12 @@ func (query FSetQueryBuilder) toCmd() cmd {
 		args = append(args, "XX")
 	}
 
-	for _, field := range query.fields {
+	for _, field := range query.fieldNums {
 		args = append(args, field.Name, floatString(field.Value))
+	}
+
+	for _, field := range query.fieldStrs {
+		args = append(args, field.Name, field.Value)
 	}
 	return newCmd("FSET", args...)
 }
@@ -36,8 +41,14 @@ func (query FSetQueryBuilder) Do() error {
 }
 
 // Field sets the object field
-func (query FSetQueryBuilder) Field(name string, value float64) FSetQueryBuilder {
-	query.fields = append(query.fields, field{name, value})
+func (query FSetQueryBuilder) FieldNumType(name string, value float64) FSetQueryBuilder {
+	query.fieldNums = append(query.fieldNums, fieldNumType{name, value})
+	return query
+}
+
+// Field sets the object field
+func (query FSetQueryBuilder) FieldStrType(name string, value string) FSetQueryBuilder {
+	query.fieldStrs = append(query.fieldStrs, fieldStrType{name, value})
 	return query
 }
 

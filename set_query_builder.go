@@ -8,7 +8,8 @@ type SetQueryBuilder struct {
 	key        string
 	objectID   string
 	area       cmd
-	fields     []field
+	fieldNums  []fieldNumType
+	fieldStrs  []fieldStrType
 	nx         bool
 	xx         bool
 	expiration *int
@@ -37,8 +38,12 @@ func (query SetQueryBuilder) toCmd() cmd {
 		args = append(args, "EX", strconv.Itoa(*query.expiration))
 	}
 
-	for _, field := range query.fields {
+	for _, field := range query.fieldNums {
 		args = append(args, "FIELD", field.Name, floatString(field.Value))
+	}
+
+	for _, field := range query.fieldStrs {
+		args = append(args, "FIELD", field.Name, field.Value)
 	}
 
 	args = append(args, query.area.Name)
@@ -53,8 +58,13 @@ func (query SetQueryBuilder) Do() error {
 }
 
 // Field sets the object field
-func (query SetQueryBuilder) Field(name string, value float64) SetQueryBuilder {
-	query.fields = append(query.fields, field{name, value})
+func (query SetQueryBuilder) FieldNumType(name string, value float64) SetQueryBuilder {
+	query.fieldNums = append(query.fieldNums, fieldNumType{name, value})
+	return query
+}
+
+func (query SetQueryBuilder) FieldStrType(name string, value string) SetQueryBuilder {
+	query.fieldStrs = append(query.fieldStrs, fieldStrType{name, value})
 	return query
 }
 

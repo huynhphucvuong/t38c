@@ -8,9 +8,14 @@ import (
 	"github.com/tidwall/gjson"
 )
 
-type field struct {
+type fieldNumType struct {
 	Name  string
 	Value float64
+}
+
+type fieldStrType struct {
+	Name  string
+	Value string
 }
 
 // KeyStats struct
