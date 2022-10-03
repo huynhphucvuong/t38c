@@ -141,7 +141,7 @@ func TestKeys(t *testing.T) {
 		{
 			Cmd: keys.Set("agent", "49").
 				PointZ(0, 0, -20).
-				Field("age", 55).
+				FieldNumType("age", 55).
 				IfNotExists().
 				Expiration(60 * 60 * 24 * 365).toCmd(),
 			Expected: "SET agent 49 NX EX 31536000 FIELD age 55 POINT 0 0 -20",
@@ -149,13 +149,13 @@ func TestKeys(t *testing.T) {
 		{
 			Cmd: keys.Set("agent", "47").
 				PointZ(0, 0, -20).
-				Field("age", 55).
-				IfExists().Field("foo", 10).toCmd(),
+				FieldNumType("age", 55).
+				IfExists().FieldNumType("foo", 10).toCmd(),
 			Expected: "SET agent 47 XX FIELD age 55 FIELD foo 10 POINT 0 0 -20",
 		},
 		{
 			Cmd: keys.FSet("agent", "47").
-				Field("cash", 100500).
+				FieldNumType("cash", 100500).
 				IfExists().toCmd(),
 			Expected: "FSET agent 47 XX cash 100500",
 		},
