@@ -143,20 +143,20 @@ type Chan struct {
 
 // GeofenceEvent struct
 type GeofenceEvent struct {
-	Command string             `json:"command"`
-	Hook    string             `json:"hook,omitempty"`
-	Group   string             `json:"group"`
-	Detect  string             `json:"detect"`
-	Key     string             `json:"key"`
-	Time    time.Time          `json:"time"`
-	ID      string             `json:"id"`
-	Object  *Object            `json:"object,omitempty"`
-	Point   *Point             `json:"point,omitempty"`
-	Bounds  *Bounds            `json:"bounds,omitempty"`
-	Hash    *string            `json:"hash,omitempty"`
-	Nearby  *RoamObject        `json:"nearby,omitempty"`
-	Faraway *RoamObject        `json:"faraway,omitempty"`
-	Fields  map[string]float64 `json:"fields,omitempty"`
+	Command string                 `json:"command"`
+	Hook    string                 `json:"hook,omitempty"`
+	Group   string                 `json:"group"`
+	Detect  string                 `json:"detect"`
+	Key     string                 `json:"key"`
+	Time    time.Time              `json:"time"`
+	ID      string                 `json:"id"`
+	Object  *Object                `json:"object,omitempty"`
+	Point   *Point                 `json:"point,omitempty"`
+	Bounds  *Bounds                `json:"bounds,omitempty"`
+	Hash    *string                `json:"hash,omitempty"`
+	Nearby  *RoamObject            `json:"nearby,omitempty"`
+	Faraway *RoamObject            `json:"faraway,omitempty"`
+	Fields  map[string]interface{} `json:"fields,omitempty"`
 }
 
 // RoamObject struct
