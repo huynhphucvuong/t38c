@@ -22,8 +22,8 @@ func (q KeysGetQueryBuilder) WithFields() KeysGetQueryBuilder {
 }
 
 type GetObjectResponse struct {
-	Object Object             `json:"object"`
-	Fields map[string]float64 `json:"fields"`
+	Object Object                 `json:"object"`
+	Fields map[string]interface{} `json:"fields"`
 }
 
 func (q KeysGetQueryBuilder) Object() (*GetObjectResponse, error) {
@@ -38,8 +38,8 @@ func (q KeysGetQueryBuilder) Object() (*GetObjectResponse, error) {
 }
 
 type GetPointResponse struct {
-	Point  Point              `json:"point"`
-	Fields map[string]float64 `json:"fields"`
+	Point  Point                  `json:"point"`
+	Fields map[string]interface{} `json:"fields"`
 }
 
 func (q KeysGetQueryBuilder) Point() (*GetPointResponse, error) {
@@ -55,8 +55,8 @@ func (q KeysGetQueryBuilder) Point() (*GetPointResponse, error) {
 }
 
 type GetBoundsResponse struct {
-	Bounds Bounds             `json:"bounds"`
-	Fields map[string]float64 `json:"fields"`
+	Bounds Bounds                 `json:"bounds"`
+	Fields map[string]interface{} `json:"fields"`
 }
 
 func (q KeysGetQueryBuilder) Bounds() (*GetBoundsResponse, error) {
@@ -72,8 +72,8 @@ func (q KeysGetQueryBuilder) Bounds() (*GetBoundsResponse, error) {
 }
 
 type GetHashResponse struct {
-	Hash   string             `json:"hash"`
-	Fields map[string]float64 `json:"fields"`
+	Hash   string                 `json:"hash"`
+	Fields map[string]interface{} `json:"fields"`
 }
 
 func (q KeysGetQueryBuilder) Hash(precision int) (*GetHashResponse, error) {
